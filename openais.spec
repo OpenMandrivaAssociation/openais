@@ -6,7 +6,7 @@
 Name: openais
 Summary: The openais Standards-Based Cluster Framework executive and APIs
 Version: 0.80.3
-Release: %mkrel 1
+Release: %mkrel 2
 License: BSD
 Group: System/Base
 URL: http://developer.osdl.org/dev/openais/
@@ -48,6 +48,7 @@ openais APIs.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+perl -pi -e 's,/usr/libexec/lcrso,%{_libexecdir}/lcrso,g'  lcr/lcr_ifact.c
 
 %build
 
