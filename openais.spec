@@ -5,8 +5,8 @@
 
 Name: openais
 Summary: The openais Standards-Based Cluster Framework executive and APIs
-Version: 0.80.3
-Release: %mkrel 3
+Version: 0.80.5
+Release: %mkrel 1
 License: BSD
 Group: System/Base
 URL: http://developer.osdl.org/dev/openais/
