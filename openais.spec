@@ -6,7 +6,7 @@
 Name: openais
 Summary: The openais Standards-Based Cluster Framework executive and APIs
 Version: 0.80.5
-Release: %mkrel 1
+Release: %mkrel 2
 License: BSD
 Group: System/Base
 URL: http://developer.osdl.org/dev/openais/
@@ -17,6 +17,7 @@ Requires(preun): rpm-helper
 Patch0: openais-defaultconfig.patch
 Patch1: openais-0.80.3-fix-arch-detection.patch
 Patch2: openais-0.80.3-build-on-glibc2.8.patch
+Patch3: openais-lsbinit.patch
 
 BuildRoot: %{_tmppath}/%{name}-root
 
@@ -49,6 +50,7 @@ openais APIs.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 perl -pi -e 's,/usr/libexec/lcrso,%{_libexecdir}/lcrso,g'  lcr/lcr_ifact.c
 
 %build
