@@ -6,7 +6,7 @@
 
 Name: openais
 Summary: The openais Standards-Based Cluster Framework executive and APIs
-Version: 1.0.1
+Version: 1.1.0
 Release: %mkrel 1
 License: BSD
 Group: System/Base
@@ -15,8 +15,9 @@ Source0: ftp://ftp%40openais%2Eorg:downloads@openais.org/downloads/openais-%{ver
 Requires(pre): rpm-helper
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
-Requires: corosync
-BuildRequires: corosync-devel
+Requires: corosync >= 1.1.0
+Requires: %{libname} >= %{version}-%{release}
+BuildRequires: corosync-devel >= 1.1.0
 Patch0: openais-defaultconfig.patch
 Patch1: openais-0.80.3-fix-arch-detection.patch
 Patch2: openais-0.80.3-build-on-glibc2.8.patch
