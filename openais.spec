@@ -6,7 +6,7 @@
 
 Name: openais
 Summary: The openais Standards-Based Cluster Framework executive and APIs
-Version: 1.1.0
+Version: 1.1.1
 Release: %mkrel 1
 License: BSD
 Group: System/Base
