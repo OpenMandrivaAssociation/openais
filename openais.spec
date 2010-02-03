@@ -6,7 +6,7 @@
 
 Name: openais
 Summary: The openais Standards-Based Cluster Framework executive and APIs
-Version: 1.1.1
+Version: 1.1.2
 Release: %mkrel 1
 License: BSD
 Group: System/Base
@@ -60,7 +60,7 @@ static binaries using the openais APIs.
 %prep
 %setup -q -n openais-%{version}
 %patch0 -p1
-%patch3 -p1
+#patch3 -p1
 
 %build
 %configure \
@@ -76,8 +76,9 @@ static binaries using the openais APIs.
 %install
 rm -rf $RPM_BUILD_ROOT
 %makeinstall_std STATICLIBS=NO LCRSODIR=%{_libexecdir}/lcrso
-mkdir -p $RPM_BUILD_ROOT%{_initrddir}
-install -m 755 init/redhat $RPM_BUILD_ROOT%{_initrddir}/openais
+mkdir -p %{buildroot}/%{_sysconfdir}/rc.d
+#install -m 755 init/generic $RPM_BUILD_ROOT%{_initrddir}/openais
+mv %{buildroot}/%{_sysconfdir}/init.d %{buildroot}/%{_initrddir}
 #install -m 755 test/openais-cfgtool $RPM_BUILD_ROOT%{_sbindir}
 # fix install permissions and make rpmlint happy
 #chmod 0755 $RPM_BUILD_ROOT%{_sbindir}/ais-keygen
