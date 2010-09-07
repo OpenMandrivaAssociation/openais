@@ -11,7 +11,7 @@ Release: %mkrel 2
 License: BSD
 Group: System/Base
 URL: http://www.openais.org/
-Source0: ftp://ftp%40openais%2Eorg:downloads@openais.org/downloads/openais-%{version}/openais-%{version}.tar.gz
+Source0: ftp://ftp:download@ftp.openais.org/downloads/openais-%{version}/openais-%{version}.tar.gz
 Requires(pre): rpm-helper
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
