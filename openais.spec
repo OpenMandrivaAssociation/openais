@@ -74,18 +74,18 @@ static binaries using the openais APIs.
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall_std STATICLIBS=NO LCRSODIR=%{_libexecdir}/lcrso
 mkdir -p %{buildroot}/%{_sysconfdir}/rc.d
-#install -m 755 init/generic $RPM_BUILD_ROOT%{_initrddir}/openais
+#install -m 755 init/generic %{buildroot}%{_initrddir}/openais
 mv %{buildroot}/%{_sysconfdir}/init.d %{buildroot}/%{_initrddir}
-#install -m 755 test/openais-cfgtool $RPM_BUILD_ROOT%{_sbindir}
+#install -m 755 test/openais-cfgtool %{buildroot}%{_sbindir}
 # fix install permissions and make rpmlint happy
-#chmod 0755 $RPM_BUILD_ROOT%{_sbindir}/ais-keygen
+#chmod 0755 %{buildroot}%{_sbindir}/ais-keygen
 mv %{buildroot}/etc/corosync/amf.conf.example %{buildroot}/etc/corosync/amf.conf
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %pre
 %_pre_useradd ais / /sbin/nologin
