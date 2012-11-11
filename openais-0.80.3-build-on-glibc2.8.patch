@@ -1,0 +1,11 @@
+--- openais-0.80.3/Makefile.inc~	2007-06-24 08:33:09.000000000 +0200
++++ openais-0.80.3/Makefile.inc	2008-09-08 17:00:21.000000000 +0200
+@@ -93,7 +93,7 @@
+ # platform specific CFLAGS, LDFLAGS
+ #
+ ifeq (${OPENAIS_COMPAT}, LINUX) 
+-	override CFLAGS += -DOPENAIS_LINUX
++	override CFLAGS += -DOPENAIS_LINUX -D_GNU_SOURCE
+ 	override LDFLAGS += -ldl -lpthread
+ 	override DYFLAGS += -rdynamic
+ endif

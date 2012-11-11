@@ -1,0 +1,18 @@
+--- openais-1.0.1/init/generic.in.orig	2008-08-15 08:42:56.000000000 +0100
++++ openais-1.0.1/init/generic.in	2009-09-03 16:23:56.000000000 +0100
+@@ -6,6 +6,15 @@
+ # processname:  corosync
+ # pidfile:      /var/run/corosync.pid
+ # description:  OpenAIS
++### BEGIN INIT INFO
++# Provides:             corosync
++# Required-Start:       $network
++# Required-Stop:        $network
++# Default-Start:
++# Default-Stop:
++# Short-Description:    Starts and stops corosync
++# Description:          Starts and stops OpenAIS corosync
++### END INIT INFO
+ 
+ # Source function library
+ . /etc/rc.d/init.d/functions

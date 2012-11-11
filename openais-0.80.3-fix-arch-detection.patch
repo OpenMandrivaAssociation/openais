@@ -1,0 +1,11 @@
+--- openais-0.80.3/Makefile~	2008-09-08 16:48:43.000000000 +0200
++++ openais-0.80.3/Makefile	2008-09-08 16:49:03.000000000 +0200
+@@ -38,7 +38,7 @@
+ MANDIR=/usr/share/man
+ ETCDIR=/etc/ais
+ LCRSODIR=/usr/libexec/lcrso
+-ARCH=$(shell uname -p)
++ARCH=$(shell uname -m)
+ 
+ ifeq (,$(findstring 64,$(ARCH)))
+ LIBDIR=/usr/lib/openais

@@ -1,0 +1,13 @@
+--- openais-1.0.1/conf/openais.conf.example~	2009-09-03 16:20:27.000000000 +0100
++++ openais-1.0.1/conf/openais.conf.example	2009-09-03 16:20:37.000000000 +0100
+@@ -13,10 +13,7 @@
+ 
+ logging {
+ 	fileline: off
+-	to_stderr: yes
+-	to_file: yes
+ 	to_syslog: yes
+-	logfile: /tmp/openais.log
+ 	debug: off
+ 	timestamp: on
+ 	logger {
