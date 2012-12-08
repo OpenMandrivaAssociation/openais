@@ -7,7 +7,7 @@
 Name: openais
 Summary: The openais Standards-Based Cluster Framework executive and APIs
 Version: 1.1.4
-Release: %mkrel 2
+Release: %mkrel 4
 License: BSD
 Group: System/Base
 URL: http://www.openais.org/
@@ -74,18 +74,18 @@ static binaries using the openais APIs.
 %make
 
 %install
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 %makeinstall_std STATICLIBS=NO LCRSODIR=%{_libexecdir}/lcrso
 mkdir -p %{buildroot}/%{_sysconfdir}/rc.d
-#install -m 755 init/generic %{buildroot}%{_initrddir}/openais
+#install -m 755 init/generic $RPM_BUILD_ROOT%{_initrddir}/openais
 mv %{buildroot}/%{_sysconfdir}/init.d %{buildroot}/%{_initrddir}
-#install -m 755 test/openais-cfgtool %{buildroot}%{_sbindir}
+#install -m 755 test/openais-cfgtool $RPM_BUILD_ROOT%{_sbindir}
 # fix install permissions and make rpmlint happy
-#chmod 0755 %{buildroot}%{_sbindir}/ais-keygen
+#chmod 0755 $RPM_BUILD_ROOT%{_sbindir}/ais-keygen
 mv %{buildroot}/etc/corosync/amf.conf.example %{buildroot}/etc/corosync/amf.conf
 
 %clean
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
 %pre
 %_pre_useradd ais / /sbin/nologin
@@ -130,3 +130,57 @@ rm -rf %{buildroot}
 %files -n %staticname
 %defattr(-,root,root,-)
 %{_libdir}/*.a
+
+
+%changelog
+* Wed May 04 2011 Oden Eriksson <oeriksson@mandriva.com> 1.1.4-2mdv2011.0
++ Revision: 666946
+- mass rebuild
+
+* Tue Sep 07 2010 Buchan Milne <bgmilne@mandriva.org> 1.1.4-1mdv2011.0
++ Revision: 576536
+- update to new version 1.1.4
+- Correct source URL
+
+* Mon Aug 09 2010 Buchan Milne <bgmilne@mandriva.org> 1.1.2-2mdv2011.0
++ Revision: 568033
+- rebuild
+
+* Wed Feb 03 2010 Buchan Milne <bgmilne@mandriva.org> 1.1.2-1mdv2010.1
++ Revision: 499965
+- New version 1.1.2
+
+* Mon Jan 04 2010 Buchan Milne <bgmilne@mandriva.org> 1.1.1-1mdv2010.1
++ Revision: 486109
+- update to new version 1.1.1
+
+* Thu Oct 01 2009 Buchan Milne <bgmilne@mandriva.org> 1.1.0-1mdv2010.0
++ Revision: 452371
+- New version 1.1.0
+- require corosync 1.1.0
+- New version 1.0.1
+- buildrequire corosync, and adapt for other related changes
+
+* Tue Apr 07 2009 Buchan Milne <bgmilne@mandriva.org> 0.80.5-2mdv2009.1
++ Revision: 364862
+- Add LSB headers to initscript
+
+* Wed Apr 01 2009 Buchan Milne <bgmilne@mandriva.org> 0.80.5-1mdv2009.1
++ Revision: 363144
+- New version 0.80.5
+
+* Tue Sep 23 2008 Buchan Milne <bgmilne@mandriva.org> 0.80.3-3mdv2009.0
++ Revision: 287579
+- Fix provides
+
+* Tue Sep 23 2008 Buchan Milne <bgmilne@mandriva.org> 0.80.3-2mdv2009.0
++ Revision: 287197
+- Fix "undefined symbol: loggers" by fixing lcrso directory to match where plugins are
+
+* Mon Sep 15 2008 Buchan Milne <bgmilne@mandriva.org> 0.80.3-1mdv2009.0
++ Revision: 284997
+- import openais
+
+
+* Mon Sep 15 2008 Buchan Milne <bgmilne@mandriva.org> 0.80.3-1mdv
+- Initial package for Mandriva based on Fedora package
