@@ -1,69 +1,120 @@
 %define alphatag svn1579
-%define libmajor 2
-%define libname %mklibname openais %libmajor
-%define develname %mklibname -d openais
-%define staticname %mklibname -d -s openais
+%define major	3
+%define maj4	4
+%define	libSaAmf	%mklibname libSaAmf %{major}
+%define	libSaCkpt	%mklibname libSaCkpt %{major}
+%define	libSaLck	%mklibname libSaLck %{major}
+%define	libSaEvt	%mklibname libSaEvt %{major}
+%define	libSaClm	%mklibname libSaClm %{major}
+%define	libSaTmr	%mklibname libSaTmr %{major}
+%define	libSaMsg	%mklibname libSaMsg %{maj4}
+%define devname	%mklibname -d %{name}
 
-Name: openais
-Summary: The openais Standards-Based Cluster Framework executive and APIs
-Version: 1.1.4
-Release: %mkrel 5
-License: BSD
-Group: System/Base
-URL: http://www.openais.org/
-Source0: ftp://ftp:download@ftp.openais.org/downloads/openais-%{version}/openais-%{version}.tar.gz
-Requires(pre): rpm-helper
-Requires(post): rpm-helper
-Requires(preun): rpm-helper
-Requires: corosync >= 1.1.0
-Requires: %{libname} >= %{version}-%{release}
-BuildRequires: corosync-devel >= 1.1.0
-Patch0: openais-defaultconfig.patch
-Patch1: openais-0.80.3-fix-arch-detection.patch
-Patch2: openais-0.80.3-build-on-glibc2.8.patch
-Patch3: openais-lsbinit.patch
+Summary:	The openais Standards-Based Cluster Framework executive and APIs
+Name:		openais
+Version:	1.1.4
+Release:	5
+License:	BSD
+Group:		System/Base
+Url:		http://www.openais.org/
+Source0:	ftp://ftp:download@ftp.openais.org/downloads/%{name}-%{version}/openais-%{version}.tar.gz
+Patch0:		openais-defaultconfig.patch
 
-BuildRoot: %{_tmppath}/%{name}-root
+BuildRequires:	pkgconfig(libcoroipcc)
+Requires(pre,post,preun):	rpm-helper
+Requires:	corosync >= 1.1.0
 
 %description 
 This package contains the openais executive, openais service handlers,
 default configuration files and init script.
 
-%package -n %libname
-Summary: The openais Standards-Based Cluster Framework libraries
-Group: System/Libraries
+%package -n %{libSaAmf}
+Summary:	The openais Standards-Based Cluster Framework libraries
+Group:		System/Libraries
+Obsoletes:	%{_lib}openais2 < 1.1.4-5
 
-%description -n %libname
+%description -n %{libSaAmf}
 This package contains the shared libraries and include files implementing 
 openais APIs.
 
-%package -n %develname
-Summary: The openais Standards-Based Cluster Framework development libraries
-Group: Development/C
-Requires: %{libname} = %{version}-%{release}
-Provides: %{name}-devel = %{version}-%{release}
+%package -n %{libSaCkpt}
+Summary:	The openais Standards-Based Cluster Framework libraries
+Group:		System/Libraries
+Conflicts:	%{_lib}openais2 < 1.1.4-5
 
-%description -n %develname
+%description -n %{libSaCkpt}
+This package contains the shared libraries and include files implementing 
+openais APIs.
+
+%package -n %{libSaLck}
+Summary:	The openais Standards-Based Cluster Framework libraries
+Group:		System/Libraries
+Conflicts:	%{_lib}openais2 < 1.1.4-5
+
+%description -n %{libSaLck}
+This package contains the shared libraries and include files implementing 
+openais APIs.
+
+%package -n %{libSaEvt}
+Summary:	The openais Standards-Based Cluster Framework libraries
+Group:		System/Libraries
+Conflicts:	%{_lib}openais2 < 1.1.4-5
+
+%description -n %{libSaEvt}
+This package contains the shared libraries and include files implementing 
+openais APIs.
+
+%package -n %{libSaClm}
+Summary:	The openais Standards-Based Cluster Framework libraries
+Group:		System/Libraries
+Conflicts:	%{_lib}openais2 < 1.1.4-5
+
+%description -n %{libSaClm}
+This package contains the shared libraries and include files implementing 
+openais APIs.
+
+%package -n %{libSaTmr}
+Summary:	The openais Standards-Based Cluster Framework libraries
+Group:		System/Libraries
+Conflicts:	%{_lib}openais2 < 1.1.4-5
+
+%description -n %{libSaTmr}
+This package contains the shared libraries and include files implementing 
+openais APIs.
+
+%package -n %{libSaMsg}
+Summary:	The openais Standards-Based Cluster Framework libraries
+Group:		System/Libraries
+Conflicts:	%{_lib}openais2 < 1.1.4-5
+
+%description -n %{libSaMsg}
+This package contains the shared libraries and include files implementing 
+openais APIs.
+
+%package -n %{devname}
+Summary:	The openais Standards-Based Cluster Framework development libraries
+Group:		Development/C
+Requires:	%{libSaAmf} = %{version}-%{release}
+Requires:	%{libSaCkpt} = %{version}-%{release}
+Requires:	%{libSaLck} = %{version}-%{release}
+Requires:	%{libSaEvt} = %{version}-%{release}
+Requires:	%{libSaClm} = %{version}-%{release}
+Requires:	%{libSaTmr} = %{version}-%{release}
+Requires:	%{libSaMsg} = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
+Obsoletes:	%{_lib}openais-static-devel = %{version}-%{release}
+
+%description -n %{devname}
 This package contains the libraries and include files used to develop using
 openais APIs.
 
-%package -n %staticname
-Summary: The openais Standards-Based Cluster Framework static libraries
-Group: Development/C
-Requires: %{name}-devel = %{version}-%{release}
-Provides: %{name}-static-devel = %{version}-%{release}
-
-%description -n %staticname
-This package contains the development library archives required to compile
-static binaries using the openais APIs.
-
 %prep
-%setup -q -n openais-%{version}
-%patch0 -p1
-#patch3 -p1
+%setup -q
+%apply_patches
 
 %build
-%configure \
+%configure2_5x \
+	--disable-static \
 	--with-lcrso-dir=$(pkg-config corosync --variable lcrsodir)
 
 # -O3 required for performance reasons
@@ -74,113 +125,63 @@ static binaries using the openais APIs.
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
 %makeinstall_std STATICLIBS=NO LCRSODIR=%{_libexecdir}/lcrso
 mkdir -p %{buildroot}/%{_sysconfdir}/rc.d
-#install -m 755 init/generic $RPM_BUILD_ROOT%{_initrddir}/openais
 mv %{buildroot}/%{_sysconfdir}/init.d %{buildroot}/%{_initrddir}
-#install -m 755 test/openais-cfgtool $RPM_BUILD_ROOT%{_sbindir}
+#install -m 755 test/openais-cfgtool %{buildroot}%{_sbindir}
 # fix install permissions and make rpmlint happy
-#chmod 0755 $RPM_BUILD_ROOT%{_sbindir}/ais-keygen
+#chmod 0755 %{buildroot}%{_sbindir}/ais-keygen
 mv %{buildroot}/etc/corosync/amf.conf.example %{buildroot}/etc/corosync/amf.conf
 
-%clean
-rm -rf $RPM_BUILD_ROOT
+rm -f %{buildroot}%{_libdir}/*.a
 
 %pre
 %_pre_useradd ais / /sbin/nologin
 
 %post
-%_post_service openais
+%_post_service %{name}
 /sbin/ldconfig > /dev/null
 
 %preun
-%_preun_service openais
+%_preun_service %{name}
 
 %postun
 %_postun_userdel ais
 
-%if %mdkversion < 200900
-%post -n %libname -p /sbin/ldconfig
-%postun -n %libname -p /sbin/ldconfig
-%endif
-
 %files 
-%defattr(-,root,root,-)
 %doc LICENSE
 %doc README.amf
+%config(noreplace) /etc/corosync/amf.conf
 %{_sbindir}/aisexec
 %{_sbindir}/openais-instantiate
-%config(noreplace) /etc/corosync/amf.conf
 %{_initrddir}/openais
 %{_libexecdir}/lcrso
 %{_mandir}/man8/*.8*
 %{_mandir}/man5/*.5*
 
-%files -n %libname
-%defattr(-,root,root,-)
-%{_libdir}/*.so.*
+%files -n %{libSaAmf}
+%{_libdir}/libSaAmf.so.%{major}*
 
-%files -n %develname
-%defattr(-,root,root,-)
+%files -n %{libSaCkpt}
+%{_libdir}/libSaCkpt.so.%{major}*
+
+%files -n %{libSaLck}
+%{_libdir}/libSaLck.so.%{major}*
+
+%files -n %{libSaEvt}
+%{_libdir}/libSaEvt.so.%{major}*
+
+%files -n %{libSaClm}
+%{_libdir}/libSaClm.so.%{major}*
+
+%files -n %{libSaTmr}
+%{_libdir}/libSaTmr.so.%{major}*
+
+%files -n %{libSaMsg}
+%{_libdir}/libSaMsg.so.%{maj4}*
+
+%files -n %{devname}
 %{_includedir}/openais/
 %{_libdir}/*.so
 %{_libexecdir}/pkgconfig/*.pc
 
-%files -n %staticname
-%defattr(-,root,root,-)
-%{_libdir}/*.a
-
-
-%changelog
-* Wed May 04 2011 Oden Eriksson <oeriksson@mandriva.com> 1.1.4-2mdv2011.0
-+ Revision: 666946
-- mass rebuild
-
-* Tue Sep 07 2010 Buchan Milne <bgmilne@mandriva.org> 1.1.4-1mdv2011.0
-+ Revision: 576536
-- update to new version 1.1.4
-- Correct source URL
-
-* Mon Aug 09 2010 Buchan Milne <bgmilne@mandriva.org> 1.1.2-2mdv2011.0
-+ Revision: 568033
-- rebuild
-
-* Wed Feb 03 2010 Buchan Milne <bgmilne@mandriva.org> 1.1.2-1mdv2010.1
-+ Revision: 499965
-- New version 1.1.2
-
-* Mon Jan 04 2010 Buchan Milne <bgmilne@mandriva.org> 1.1.1-1mdv2010.1
-+ Revision: 486109
-- update to new version 1.1.1
-
-* Thu Oct 01 2009 Buchan Milne <bgmilne@mandriva.org> 1.1.0-1mdv2010.0
-+ Revision: 452371
-- New version 1.1.0
-- require corosync 1.1.0
-- New version 1.0.1
-- buildrequire corosync, and adapt for other related changes
-
-* Tue Apr 07 2009 Buchan Milne <bgmilne@mandriva.org> 0.80.5-2mdv2009.1
-+ Revision: 364862
-- Add LSB headers to initscript
-
-* Wed Apr 01 2009 Buchan Milne <bgmilne@mandriva.org> 0.80.5-1mdv2009.1
-+ Revision: 363144
-- New version 0.80.5
-
-* Tue Sep 23 2008 Buchan Milne <bgmilne@mandriva.org> 0.80.3-3mdv2009.0
-+ Revision: 287579
-- Fix provides
-
-* Tue Sep 23 2008 Buchan Milne <bgmilne@mandriva.org> 0.80.3-2mdv2009.0
-+ Revision: 287197
-- Fix "undefined symbol: loggers" by fixing lcrso directory to match where plugins are
-
-* Mon Sep 15 2008 Buchan Milne <bgmilne@mandriva.org> 0.80.3-1mdv2009.0
-+ Revision: 284997
-- import openais
-
-
-* Mon Sep 15 2008 Buchan Milne <bgmilne@mandriva.org> 0.80.3-1mdv
-- Initial package for Mandriva based on Fedora package
