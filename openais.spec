@@ -1,13 +1,13 @@
 %define alphatag svn1579
 %define major	3
 %define maj4	4
-%define	libSaAmf	%mklibname libSaAmf %{major}
-%define	libSaCkpt	%mklibname libSaCkpt %{major}
-%define	libSaLck	%mklibname libSaLck %{major}
-%define	libSaEvt	%mklibname libSaEvt %{major}
-%define	libSaClm	%mklibname libSaClm %{major}
-%define	libSaTmr	%mklibname libSaTmr %{major}
-%define	libSaMsg	%mklibname libSaMsg %{maj4}
+%define	libSaAmf	%mklibname SaAmf %{major}
+%define	libSaCkpt	%mklibname SaCkpt %{major}
+%define	libSaLck	%mklibname SaLck %{major}
+%define	libSaEvt	%mklibname SaEvt %{major}
+%define	libSaClm	%mklibname SaClm %{major}
+%define	libSaTmr	%mklibname SaTmr %{major}
+%define	libSaMsg	%mklibname SaMsg %{maj4}
 %define devname	%mklibname -d %{name}
 
 Summary:	The openais Standards-Based Cluster Framework executive and APIs
