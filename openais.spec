@@ -13,7 +13,7 @@
 Summary:	The openais Standards-Based Cluster Framework executive and APIs
 Name:		openais
 Version:	1.1.4
-Release:	5
+Release:	6
 License:	BSD
 Group:		System/Base
 Url:		http://www.openais.org/
