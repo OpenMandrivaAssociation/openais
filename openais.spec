@@ -183,5 +183,5 @@ rm -f %{buildroot}%{_libdir}/*.a
 %files -n %{devname}
 %{_includedir}/openais/
 %{_libdir}/*.so
-%{_libexecdir}/pkgconfig/*.pc
+%{_libdir}/pkgconfig/*.pc
 
