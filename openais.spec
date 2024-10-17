@@ -16,7 +16,7 @@ Version:	1.1.4
 Release:	14
 License:	BSD
 Group:		System/Base
-Url:		http://www.openais.org/
+Url:		https://www.openais.org/
 Source0:	ftp://ftp:download@ftp.openais.org/downloads/%{name}-%{version}/openais-%{version}.tar.gz
 Patch0:		openais-defaultconfig.patch
 
