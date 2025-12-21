@@ -20,6 +20,11 @@ Url:		https://www.openais.org/
 Source0:	ftp://ftp:download@ftp.openais.org/downloads/%{name}-%{version}/openais-%{version}.tar.gz
 Patch0:		openais-defaultconfig.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(libcoroipcc)
 Requires(pre,post,preun):	rpm-helper
 Requires:	corosync >= 1.1.0
